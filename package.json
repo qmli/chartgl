@@ -1,0 +1,59 @@
+{
+    "name": "chartgl",
+    "version": "1.0.0",
+    "description": "一个专门用于大规模时间序列数据的图表库，基于 WebGL 构建",
+    "main": "dist/chartgl.umd.js",
+    "module": "dist/lib/index.js",
+    "types": "dist/lib/index.d.ts",
+    "typesVersions": {
+        "*": {
+            "dist/*": [
+                "dist/*"
+            ],
+            "*": [
+                "dist/lib/*",
+                "dist/lib/*/index"
+            ]
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": "./dist/lib/index.js",
+        "./*": "./dist/lib/*"
+    },
+    "scripts": {
+        "demo": "http-server -c1 -o /demo/index.html",
+        "build": "tsc && rollup -c",
+        "start": "rollup -c -w",
+        "test": "tsd && jest",
+        "prepare": "npm run build"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "d3-axis": "^3.0.0",
+        "d3-color": "^3.0.1",
+        "d3-scale": "^4.0.2",
+        "d3-selection": "^3.0.0",
+        "gl-matrix": "^3.3.0",
+        "tslib": "^2.4.0"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^25.0.1",
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "@rollup/plugin-terser": "^0.4.3",
+        "@rollup/plugin-typescript": "^11.1.1",
+        "@types/d3-axis": "^3.0.1",
+        "@types/d3-color": "^3.0.2",
+        "@types/d3-scale": "^4.0.1",
+        "@types/d3-selection": "^3.0.1",
+        "@types/jest": "^29.5.2",
+        "http-server": "^14.0.0",
+        "jest": "^29.5.0",
+        "rollup": "^3.25.0",
+        "ts-jest": "^29.1.0",
+        "tsd": "^0.28.1",
+        "typescript": "^5.1.3"
+    }
+}
