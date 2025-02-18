@@ -6,6 +6,7 @@ import { d3Axis } from './plugins/d3Axis';
 import { legend } from './plugins/legend';
 import { lineChart } from './plugins/lineChart';
 import { nearestPoint } from './plugins/nearestPoint';
+import { splitLine } from './plugins/splitLine';
 import { ChartGLTooltipPlugin } from './plugins/tooltip';
 
 type TDefaultPlugins = {
@@ -13,6 +14,7 @@ type TDefaultPlugins = {
     d3Axis: typeof d3Axis,
     crosshair: typeof crosshair,
     nearestPoint: typeof nearestPoint,
+    splitLine: typeof splitLine,
     legend: typeof legend,
     zoom: ChartGLZoomPlugin,
     tooltip: ChartGLTooltipPlugin,
@@ -26,6 +28,7 @@ function addDefaultPlugins<TPlugins extends ChartGLPlugins=NoPlugin>(options?: C
             lineChart,
             d3Axis,
             crosshair,
+            splitLine,
             nearestPoint,
             legend,
             zoom: new ChartGLZoomPlugin(o.zoom),

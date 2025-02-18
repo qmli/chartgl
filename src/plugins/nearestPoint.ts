@@ -19,13 +19,13 @@ export class NearestPoint {
 
         const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
         style.textContent = `
-.chartgl-crosshair-intersect {
-    fill: var(--background-overlay, white);
-    visibility: hidden;
-}
-.chartgl-crosshair-intersect circle {
-    r: 3px;
-}`;
+        .chartgl-crosshair-intersect {
+        fill: var(--background-overlay, white);
+        visibility: hidden;
+        }
+        .chartgl-crosshair-intersect circle {
+        r: 3px;
+        }`;
         const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
         g.classList.add('chartgl-crosshair-intersect');
         g.appendChild(style);

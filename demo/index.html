@@ -30,25 +30,27 @@
     </style>
 </head>
 <body>
-    <h1>ChartGL Demo</h1>
-    <h2>1000 points / second adding to chart.</h2>
+    <h1>ChartGL 演示</h1>
+    <h2>以每秒 100000 点的速度添加到图表。</h2>
     <p><span id="point-count">0</span> Points</p>
     <div id="chart"></div>
-    <button id="stop-btn">Stop</button>
-    <button id="follow-btn">Follow Data</button>
-    <button id="legend-btn">Toggle Legend</button>
-    <button id="tooltip-btn">Toggle Tooltip</button>
+    <button id="stop-btn">停止</button>
+    <button id="follow-btn">跟踪数据 </button>
+    <button id="legend-btn">切换图例</button>
+    <button id="tooltip-btn">工具提示</button>
+    <button id="sin-btn">sin图例</button>
+    <button id="cos-btn">cos图例</button>
 
     <div class="padding-control">
         <div>
-            <label>Padding:</label>
+            <label>填充范围:</label>
             <span id="padding-top" title="top"></span>
             <span id="padding-right" title="right"></span>
             <span id="padding-bottom" title="bottom"></span>
             <span id="padding-left" title="left"></span>
         </div>
         <div>
-            <label>Render Padding:</label>
+            <label>渲染填充:</label>
             <input type="number" id="render-padding-top" placeholder="top" title="top">
             <input type="number" id="render-padding-right" placeholder="right" title="right">
             <input type="number" id="render-padding-bottom" placeholder="bottom" title="bottom">
