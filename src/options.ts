@@ -36,7 +36,7 @@ interface ScaleBase {
 export interface TooltipOptions {
     enabled: boolean;
     xLabel: string;
-    xFormatter: (x: number) => string;
+    xFormatter: (x: DataPoint) => string;
 }
 
 interface ChartGLRenderOptions {

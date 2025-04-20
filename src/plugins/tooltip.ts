@@ -1,6 +1,7 @@
 import { ChartGLSeriesOptions, TooltipOptions } from "../options";
 import { ChartGLPlugin } from ".";
 import core from "../core";
+import { DataPoint } from "../core/renderModel";
 
 type ItemElements = { item: HTMLElement; example: HTMLElement; name: HTMLElement, value: HTMLElement }
 
@@ -110,7 +111,7 @@ td {
 
             // display X for the data point that is the closest to the pointer
             let minPointerDistance = Number.POSITIVE_INFINITY;
-            let displayingX: number | null = null;
+            let displayingX: DataPoint | null = null;
             for (const [s, d] of chart.nearestPoint.dataPoints) {
                 const px = chart.model.pxPoint(d);
                 const dx = px.x - p.x;
@@ -118,12 +119,33 @@ td {
                 const dis = Math.sqrt(dx * dx + dy * dy);
                 if (dis < minPointerDistance) {
                     minPointerDistance = dis;
-                    displayingX = d.x;
+                    displayingX = {
+                        x: d.x,
+                        y: d.y,
+                        o: d.o,
+                    };
                 }
             }
 
-            const xFormatter = options.xFormatter;
-            this.xItem.value.textContent = xFormatter(displayingX!);
+            if (displayingX) {
+                const xFormatter = options.xFormatter;
+                this.xItem.value.textContent = xFormatter(displayingX);
+
+                for (const s of chart.options.series) {
+                    if (!s.visible)
+                        continue;
+
+                    let point = chart.nearestPoint.dataPoints.get(s);
+                    let item = this.items.get(s);
+                    if (item) {
+                        item.item.classList.toggle('out-of-range', !point);
+                        if (point) {
+                            item.value.textContent = point.y.toLocaleString();
+                            item.item.classList.toggle('x-not-aligned', point.x !== displayingX.x);
+                        }
+                    }
+                }
+            }
 
             for (const s of chart.options.series) {
                 if (!s.visible)
@@ -135,7 +157,7 @@ td {
                     item.item.classList.toggle('out-of-range', !point);
                     if (point) {
                         item.value.textContent = point.y.toLocaleString();
-                        item.item.classList.toggle('x-not-aligned', point.x !== displayingX);
+                        item.item.classList.toggle('x-not-aligned', point.x !== displayingX!.x);
                     }
                 }
             }

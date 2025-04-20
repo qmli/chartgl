@@ -5,6 +5,7 @@ import { EventDispatcher } from '../utils';
 export interface DataPoint {
     x: number;
     y: number;
+    o: number; // 原来数据
 }
 
 export interface MinMax { min: number; max: number; }
@@ -36,6 +37,7 @@ export class RenderModel {
     constructor(private options: ResolvedCoreOptions) {
         if (options.xRange !== 'auto' && options.xRange) {
             this.xScale.domain([options.xRange.min, options.xRange.max])
+            console.log('xRange', options.xRange, this.xScale.domain())
         }
         if (options.yRange !== 'auto' && options.yRange) {
             this.yScale.domain([options.yRange.min, options.yRange.max])
@@ -82,6 +84,7 @@ export class RenderModel {
         {
             const maxDomain = Math.max(...series.map(s => s.data[s.data.length - 1].x));
             const minDomain = Math.min(...series.map(s => s.data[0].x));
+
             this.xRange = { max: maxDomain, min: minDomain };
             if (this.options.realTime || o.xRange === 'auto') {
                 if (this.options.realTime) {
