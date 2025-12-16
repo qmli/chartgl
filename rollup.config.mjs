@@ -2,8 +2,9 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import terser from "@rollup/plugin-terser";
+import { readFileSync } from 'fs';
 
-import pkg from './package.json' assert {type: 'json'};
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 const ts = typescript({ compilerOptions: {outDir: 'dist', declaration: false}})
 
