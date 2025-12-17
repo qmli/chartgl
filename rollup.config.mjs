@@ -3,7 +3,9 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import terser from "@rollup/plugin-terser";
 
-import pkg from './package.json' assert {type: 'json'};
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 const ts = typescript({ compilerOptions: {outDir: 'dist', declaration: false}})
 
