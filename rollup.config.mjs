@@ -5,7 +5,9 @@ import terser from "@rollup/plugin-terser";
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
-import pkg from './package.json' with { type: 'json' };
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 const ts = typescript({ compilerOptions: {outDir: 'dist', declaration: false}})
 const isDemo = process.env.DEMO === 'true';
