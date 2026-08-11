@@ -2,6 +2,7 @@ import { ChartGLSeriesOptions, TooltipOptions } from "../options";
 import { ChartGLPlugin } from ".";
 import core from "../core";
 import { DataPoint } from "../core/renderModel";
+import { formatDateTime } from "../core/timeFormat";
 
 type ItemElements = { item: HTMLElement; example: HTMLElement; name: HTMLElement, value: HTMLElement }
 
@@ -201,7 +202,7 @@ td {
 const defaultOptions: TooltipOptions = {
     enabled: false,
     xLabel: "X",
-    xFormatter: x => x.toLocaleString(),
+    xFormatter: x => formatDateTime(x.x),
 };
 
 export class ChartGLTooltipPlugin implements ChartGLPlugin<Tooltip> {
@@ -215,6 +216,9 @@ export class ChartGLTooltipPlugin implements ChartGLPlugin<Tooltip> {
     }
 
     apply(chart: core) {
+        if (this.options.xFormatter === defaultOptions.xFormatter) {
+            this.options.xFormatter = (d) => formatDateTime(d.x + chart.options.baseTime);
+        }
         return new Tooltip(chart, this.options);
     }
 }

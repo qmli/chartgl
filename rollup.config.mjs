@@ -2,10 +2,13 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import terser from "@rollup/plugin-terser";
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
 
-import pkg from './package.json' assert {type: 'json'};
+import pkg from './package.json' with { type: 'json' };
 
 const ts = typescript({ compilerOptions: {outDir: 'dist', declaration: false}})
+const isDemo = process.env.DEMO === 'true';
 
 const config = {
     input: `src/index.ts`,
@@ -34,11 +37,24 @@ const config = {
     external: (id) => id.startsWith('d3-'),
     watch: {
         include: 'src/**',
+        clearScreen: false,
     },
     plugins: [
         ts,
         commonjs(),
         resolve(),
+        ...(isDemo ? [
+            serve({
+                open: true,
+                openPage: '/demo/index.html',
+                contentBase: '.',
+                port: 8080,
+            }),
+            livereload({
+                watch: ['dist', 'demo'],
+                verbose: false,
+            }),
+        ] : []),
     ],
 }
 

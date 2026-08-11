@@ -30,6 +30,8 @@ export interface ResolvedOptions {
     y?: ResolvedAxisOptions;
     panMouseButtons: number;
     touchMinPoints: number;
+    /** When true, plain wheel zooms X instead of panning. */
+    wheelZoom: boolean;
     eventElement: CapableElement;
 }
 
@@ -38,6 +40,8 @@ export interface ChartZoomOptions {
     y?: AxisOptions;
     panMouseButtons?: number;
     touchMinPoints?: number;
+    /** When true, plain wheel zooms X instead of panning. */
+    wheelZoom?: boolean;
     eventElement?: CapableElement;
 }
 
