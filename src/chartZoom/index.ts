@@ -14,6 +14,7 @@ export const defaultAxisOptions = {
 export const defaultOptions = {
     panMouseButtons: 1 | 2 | 4,
     touchMinPoints: 1,
+    wheelZoom: false,
 } as const;
 
 export class ChartZoom {

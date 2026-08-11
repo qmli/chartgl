@@ -35,7 +35,11 @@ export class ChartZoomWheel {
                 zoom: 0,
             }
         };
-        if (event.ctrlKey || event.metaKey) { // zoom
+        // Plain wheel pans by default; Ctrl/Meta zooms. `wheelZoom` (e.g. realTime) flips that.
+        const zoom = this.options.wheelZoom
+            ? !(event.ctrlKey || event.metaKey)
+            : (event.ctrlKey || event.metaKey);
+        if (zoom) {
             if (event.altKey) {
                 transform[DIRECTION.X].zoom = deltaX;
                 transform[DIRECTION.Y].zoom = deltaY;
